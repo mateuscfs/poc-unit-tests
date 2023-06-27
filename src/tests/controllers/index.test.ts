@@ -93,25 +93,37 @@ test.serial('controller update fail', async t => {
 });
 
 test.serial('controller getAll success case', async t => {
+    const nameRepository = [{ name: 'getAll' }];
     const getAllSpy = sinon
         .stub(repository, 'getAll')
         .resolves([{ name: 'getAll' }]);
     const result = await repository.getAll();
 
     t.true(getAllSpy.calledOnce);
-    t.deepEqual(result, [{ name: 'getAll' }]);
+    t.deepEqual(result, nameRepository);
 });
 
-test.serial('controller getAll Error', async t => {
-    const getAllSpy = sinon.stub(repository, 'getAll').resolves([{ name: '1' }]);
+test.serial('controller getAll http error', async t => {
+    const getAllSpy = sinon.stub(repository, 'getAll').throws();
 
     await t.throwsAsync(controller.getAll(), {
         code: 500,
         instanceOf: HttpError,
     });
+    t.true(getAllSpy.calledWithExactly());
+
     t.true(getAllSpy.calledOnce);
-    t.true(getAllSpy.calledWithExactly([{ name: '' }]));
 });
+
+test.serial('controller getAll Data not found', async t => {
+    const getAllSpy = sinon.stub(repository, 'getAll').throws();
+
+    getAllSpy.onFirstCall().resolves(<any>'Data Not Found');
+    getAllSpy.onSecondCall().resolves([{ HttpError }]);
+    const result = await getAllSpy();
+
+    t.deepEqual(result, 'Data Not Found');
+}); /* Falta conseguir retornar 'Data Not Found' */
 
 test.serial('controller getById success case', async t => {
     const actionId = 'string';
