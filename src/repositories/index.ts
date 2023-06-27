@@ -3,9 +3,7 @@ export const create = async (data: any): Promise<string> => {
     return repository.create();
 };
 
-export const getById = async (
-    id: string,
-): Promise<string | undefined> => {
+export const getById = async (id: string): Promise<string | undefined> => {
     const repository = { findOne: (id: string) => id };
     return repository.findOne(id);
 };
@@ -19,11 +17,11 @@ export const updateById = async (
 };
 
 export const deleteById = async (id: string): Promise<string> => {
-    const repository = { delete: (id: string) => 'deleted'}
+    const repository = { delete: (id: string) => 'deleted' };
     return repository.delete(id);
 };
 
 export const getAll = async (): Promise<Record<string, unknown>[]> => {
-    const repository = { find: () => [{ name: 'getAll' }]}
+    const repository = { find: () => [{ name: 'getAll' }] };
     return repository.find();
 };
