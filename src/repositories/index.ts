@@ -12,7 +12,11 @@ export const updateById = async (
     id: string,
     data: Record<string, unknown>,
 ): Promise<any> => {
-    const repository = { update: (id: string, data: any) => id };
+    const repository = {
+        update: (id: string, data: any) => {
+            return { id, ...data };
+        },
+    };
     return repository.update(id, data);
 };
 
