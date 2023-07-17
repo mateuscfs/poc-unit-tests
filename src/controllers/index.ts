@@ -1,7 +1,12 @@
 import { HttpError } from '../utils/errors';
 import * as repositories from '../repositories';
+import {
+    CreateIndexInterface,
+    UpdateIndexInterface,
+    IndexGetAllRepositoryInterface,
+} from '../interfaces/index';
 
-export const create = async (data: Record<string, unknown>): Promise<any> => {
+export const create = async (data: CreateIndexInterface): Promise<any> => {
     try {
         const result = await repositories.create(data);
         return result;
@@ -21,15 +26,15 @@ export const remove = async (id: string): Promise<any> => {
     }
 };
 
-export const update = async (data: any): Promise<any> => {
+export const update = async (data: UpdateIndexInterface): Promise<any> => {
     try {
         await getById(data.id);
 
-        const { name, description, title } = data;
+        const { array, numero, boolean } = data;
         const result = await repositories.updateById(data.id, {
-            name,
-            description,
-            title,
+            array,
+            numero,
+            boolean,
         });
 
         return result;
@@ -38,7 +43,7 @@ export const update = async (data: any): Promise<any> => {
     }
 };
 
-export const getAll = async (): Promise<any> => {
+export const getAll = async (): Promise<IndexGetAllRepositoryInterface> => {
     try {
         const result = await repositories.getAll();
         if (result.length === 0) {
