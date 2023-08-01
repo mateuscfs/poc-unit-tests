@@ -4,6 +4,9 @@ import {
     generateStringValidator,
     generateAtLeastOneKeyValidator,
     generateShelfLifeValidator,
+    generateArrayValidator,
+    generateBooleanValidator,
+    generateNumberValidator,
 } from '../validation/customValidators';
 import {
     headerTenantIdValidator,
@@ -12,20 +15,19 @@ import {
 } from '../validation/validators/common';
 
 export const createValidator = [
-    generateStringValidator(['alias']),
-    generateStringValidator(['mainEstablishmentId'], undefined, true),
-    generateShelfLifeValidator(['validFrom, validTo']),
+    generateStringValidator(['name']),
+    generateNumberValidator(['number']),
+    generateArrayValidator(['array']),
+    generateBooleanValidator(['active']),
 ].concat(headerTenantIdValidator);
 
-export const getProfileValidator = [idParamValidator].concat(
-    headerTenantIdValidator,
-);
+export const getProfileValidator = headerTenantIdValidator;
 
 export const updateProfileValidator = [
-    generateStringValidator(['alias'], undefined, true),
-    generateShelfLifeValidator(['validFrom, validTo']),
-    generateAtLeastOneKeyValidator(),
-    idParamValidator,
+    generateStringValidator(['name', 'id']),
+    generateNumberValidator(['number']),
+    generateArrayValidator(['array']),
+    generateBooleanValidator(['active']),
 ].concat(headerTenantIdValidator);
 
 const profileParams = ['validFrom', 'validTo', 'alias', 'created_at'];
@@ -39,7 +41,6 @@ export const getAllWithSort = [
         .optional()
         .isBoolean()
         .withMessage(`the value must be a boolean.`),
-    query('alias').optional().isString().withMessage(MSG_TYPE_STR),
     query('withPagination')
         .optional()
         .isBoolean()

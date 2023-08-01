@@ -1,6 +1,6 @@
 import { query, header, param } from 'express-validator';
 
-export const headerTenantIdValidator = [header('tenantid').isUUID()];
+export const headerTenantIdValidator = [header('tenantid').isString()];
 
 export const paginationValidator = [
     query('page')
@@ -22,7 +22,7 @@ export const getByIdValidator = [
     param(['id']).isUUID(),
 ].concat(headerTenantIdValidator);
 
-export const idParamValidator = param('id').isUUID();
+export const idParamValidator = param('id').isString();
 
 export const getAllByIdValidator = [param('id').isUUID()].concat(
     headerTenantIdValidator,

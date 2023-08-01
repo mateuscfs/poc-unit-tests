@@ -33,6 +33,16 @@ export const generateArrayValidator = (
     return body(deepFields).isArray();
 };
 
+export const generateNumberValidator = (
+    fields: Array<string>,
+    path = '',
+    optional?: boolean,
+): ValidationChain => {
+    const deepFields = generateDeepPath(path, fields);
+
+    return body(deepFields).isNumeric().optional({ checkFalsy: true });
+};
+
 export const generateBooleanValidator = (
     fields: Array<string>,
     path = '',
@@ -42,7 +52,7 @@ export const generateBooleanValidator = (
 
     if (optional) return body(deepFields).isBoolean().optional({ checkFalsy: true });
 
-    return body(deepFields).isArray();
+    return body(deepFields).isBoolean();
 };
 export const generateShelfLifeValidator = (
     fields: Array<string>,
@@ -61,18 +71,6 @@ export const generateAtLeastOneKeyValidator = (): ValidationChain => {
     });
 };
 
-export const generateUuidValidator = (
-    fields: Array<string>,
-    path = '',
-    optional?: boolean,
-): ValidationChain => {
-    const deepFields = generateDeepPath(path, fields);
-
-    if (optional) return body(deepFields).isUUID().optional({ checkFalsy: true });
-
-    return body(deepFields).isUUID();
-};
-
 export const generateOptionalObjectValidator = (
     path: string,
     internalValidator: ValidationChain[],
@@ -82,18 +80,4 @@ export const generateOptionalObjectValidator = (
 
         return true;
     });
-};
-
-export const generateCpfValidator = (
-    path: string,
-    optional = false,
-): ValidationChain => {
-    return body(path).optional(optional);
-};
-
-export const generateCnpjValidator = (
-    path: string,
-    optional = false,
-): ValidationChain => {
-    return body(path).optional(optional);
 };
