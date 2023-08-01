@@ -30,10 +30,10 @@ export const update = async (data: UpdateIndexInterface): Promise<any> => {
     try {
         await getById(data.id);
 
-        const { array, numero, boolean } = data;
+        const { array, number, boolean } = data;
         const result = await repositories.updateById(data.id, {
             array,
-            numero,
+            number,
             boolean,
         });
 

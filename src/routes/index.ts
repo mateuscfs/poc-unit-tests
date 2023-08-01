@@ -15,14 +15,17 @@ routes.post(
     async (req: Request, res: Response) => {
         const data = <any>matchedData(req, { includeOptionals: false });
         const result = await controllers.create(data);
-        res.send(result);
+        res.status(201).send(result);
     },
 );
-
-routes.get('/:id', async (req: Request, res: Response) => {
-    const data = <any>matchedData(req, { includeOptionals: false });
-    const result = await controllers.getById(data.id);
-    res.send(result);
-});
+routes.get(
+    '/:id',
+    indexValidators.getProfileValidator,
+    async (req: Request, res: Response) => {
+        const data = <any>matchedData(req, { includeOptionals: false });
+        const result = await controllers.getById(data.id);
+        res.status(200).send(result);
+    },
+);
 
 export default routes;
