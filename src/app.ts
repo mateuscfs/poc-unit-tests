@@ -21,8 +21,8 @@ class App {
         this.app.use(cors());
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: false }));
-        this.app.use(routes);
         this.app.use(App.errorHandling);
+        this.app.use(routes);
         this.app.disable('x-powered-by');
     }
 

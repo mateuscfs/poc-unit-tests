@@ -13,9 +13,14 @@ routes.post(
     '/create',
     indexValidators.createValidator,
     async (req: Request, res: Response) => {
-        const data = <any>matchedData(req, { includeOptionals: false });
-        const result = await controllers.create(data);
-        res.status(201).send(result);
+        try {
+            const data = <any>matchedData(req, { includeOptionals: false });
+            const result = await controllers.create(data);
+            res.status(201).send(result);
+        } catch (error) {
+            console.log(error);
+            res.status(error.code).send(error.message);
+        }
     },
 );
 routes.get(
