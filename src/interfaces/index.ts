@@ -7,7 +7,7 @@ export interface IndexInterface {
 
 export interface CreateIndexInterface {
     name: string;
-    numero: number;
+    number: number;
     array: string[];
     active: boolean;
 }
@@ -15,7 +15,7 @@ export interface CreateIndexInterface {
 export interface UpdateIndexInterface {
     id: string;
     name: string;
-    numero: number;
+    number: number;
     array: string[];
     active: boolean;
 }
