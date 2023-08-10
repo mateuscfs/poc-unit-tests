@@ -1,9 +1,15 @@
-export const create = async (data: any): Promise<string> => {
+import {
+    IndexInterface,
+    UpdateIndexInterface,
+    CreateIndexInterface,
+} from '../interfaces';
+
+export const create = async (data: any): Promise<CreateIndexInterface> => {
     const repository = { create: () => 'created' };
     return repository.create();
 };
 
-export const getById = async (id: string): Promise<string | undefined> => {
+export const getById = async (id: string): Promise<IndexInterface[]> => {
     const repository = { findOne: (id: string) => id };
     return repository.findOne(id);
 };
@@ -11,7 +17,7 @@ export const getById = async (id: string): Promise<string | undefined> => {
 export const updateById = async (
     id: string,
     data: Record<string, unknown>,
-): Promise<any> => {
+): Promise<UpdateIndexInterface> => {
     const repository = {
         update: (id: string, data: any) => {
             return { id, ...data };
@@ -25,7 +31,7 @@ export const deleteById = async (id: string): Promise<string> => {
     return repository.delete(id);
 };
 
-export const getAll = async (): Promise<Record<string, unknown>[]> => {
+export const getAll = async (): Promise<IndexInterface[]> => {
     const repository = { find: () => [{ name: 'getAll' }] };
     return repository.find();
 };

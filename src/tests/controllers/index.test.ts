@@ -6,7 +6,7 @@ import * as controller from '../../controllers';
 test('controller create', async () => {
     const stringData = { test: 'asd' };
     const createSpy = vi.spyOn(repository, 'create').mockResolvedValue('created');
-    const result = await controller.create(stringData);
+    const result = await controller.create(<any>stringData);
 
     expect(createSpy).toBeCalledWith(stringData);
     expect(result).toEqual('created');
@@ -16,7 +16,7 @@ test('controller create throws error ', async t => {
     const stringData = {};
     vi.spyOn(repository, 'create').mockRejectedValue(stringData);
 
-    await expect(() => controller.create(stringData)).rejects.toBeInstanceOf(
+    await expect(() => controller.create(<any>stringData)).rejects.toBeInstanceOf(
         HttpError,
     );
 });
@@ -48,15 +48,18 @@ test('update success case UpdateById mock', async () => {
         id: 'UUID GET',
         name: 'Voveirne',
         description: 'Serrote',
-        title: 'Correto',
+        active: true,
+        array: ['arrayde', 'stringsss'],
+        number: 3,
     };
     const getByIdSpy = vi.spyOn(repository, 'getById').mockResolvedValueOnce('ID');
     const updateByIdSpy = vi.spyOn(repository, 'updateById').mockResolvedValue(data);
     await controller.update(data);
     expect(updateByIdSpy).toBeCalledWith(data.id, {
         name: data.name,
-        description: data.description,
-        title: data.title,
+        active: data.active,
+        array: data.array,
+        number: data.number,
     });
     expect(getByIdSpy).toBeCalledWith(data.id);
 });
@@ -64,7 +67,9 @@ test('update success case UpdateById mock', async () => {
 test('update throws error', async () => {
     const dataId = {};
     vi.spyOn(repository, 'updateById').mockRejectedValueOnce(dataId);
-    await expect(() => controller.update(dataId)).rejects.toBeInstanceOf(HttpError);
+    await expect(() => controller.update(<any>dataId)).rejects.toBeInstanceOf(
+        HttpError,
+    );
 });
 
 test('controllers getAll', async () => {

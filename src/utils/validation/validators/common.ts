@@ -24,7 +24,7 @@ export const getByIdValidator = [
 
 export const idParamValidator = param('id').isString();
 
-export const getAllByIdValidator = [param('id').isUUID()].concat(
+export const getAllByIdValidator = [param('id')].concat(
     headerTenantIdValidator,
     paginationValidator,
 );

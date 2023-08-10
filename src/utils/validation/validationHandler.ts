@@ -1,11 +1,12 @@
 import { Request } from 'express';
-import { validationResult, matchedData } from 'express-validator';
+import { validationResult, matchedData, ValidationError } from 'express-validator';
 import { ValidatorError } from './validationError';
 
 export const throwsIfNotValid = (req: Request): void => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
+        console.log(errors.array);
         throw new ValidatorError(errors.array());
     }
 };

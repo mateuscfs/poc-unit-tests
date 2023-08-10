@@ -1,6 +1,5 @@
-import { expect, test, vi } from 'vitest';
+import { expect, test } from 'vitest';
 import * as repository from '../../repositories';
-import { HttpError } from '../../utils/errors';
 
 test('repositories create ', async t => {
     const stringData = { testei: 'created' };

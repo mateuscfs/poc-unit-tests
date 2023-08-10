@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ValidationError } from 'express-validator';
+// eslint-disable-next-line max-classes-per-file
+import { Result, ValidationError } from 'express-validator';
 import { HttpError } from '../errors';
 
 const extractErrors = (validationErrors: ValidationError[]) => {
@@ -29,6 +30,13 @@ export class ValidatorError extends HttpError {
     constructor(errors: ValidationError[]) {
         super(400, 'Bad Request');
 
-        this.errors = errors;
+        this.errors = [
+            {
+                location: 'body',
+                param: 'teste',
+                value: 'any',
+                msg: 'any',
+            },
+        ];
     }
 }
