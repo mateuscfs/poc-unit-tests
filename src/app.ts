@@ -41,7 +41,7 @@ class App {
             errors,
         };
 
-        return res.status(apiError.code).send(apiError);
+        return res.status(code).send(apiError);
     }
 }
 
