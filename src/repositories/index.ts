@@ -4,12 +4,12 @@ import {
     CreateIndexInterface,
 } from '../interfaces';
 
-export const create = async (data: any): Promise<CreateIndexInterface> => {
+export const create = async (data: CreateIndexInterface): Promise<string> => {
     const repository = { create: () => 'created' };
     return repository.create();
 };
 
-export const getById = async (id: string): Promise<IndexInterface[]> => {
+export const getById = async (id: string): Promise<string> => {
     const repository = { findOne: (id: string) => id };
     return repository.findOne(id);
 };

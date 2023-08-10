@@ -6,7 +6,7 @@ import {
     IndexGetAllRepositoryInterface,
 } from '../interfaces/index';
 
-export const create = async (data: CreateIndexInterface): Promise<any> => {
+export const create = async (data: CreateIndexInterface): Promise<string> => {
     try {
         const result = await repositories.create(data);
         return result;
@@ -15,7 +15,7 @@ export const create = async (data: CreateIndexInterface): Promise<any> => {
     }
 };
 
-export const remove = async (id: string): Promise<any> => {
+export const remove = async (id: string): Promise<{ message: 'Deleted' }> => {
     try {
         await getById(id);
         await repositories.deleteById(id);
@@ -26,7 +26,9 @@ export const remove = async (id: string): Promise<any> => {
     }
 };
 
-export const update = async (data: UpdateIndexInterface): Promise<any> => {
+export const update = async (
+    data: UpdateIndexInterface,
+): Promise<UpdateIndexInterface> => {
     try {
         await getById(data.id);
 
@@ -57,7 +59,7 @@ export const getAll = async (): Promise<IndexGetAllRepositoryInterface> => {
     }
 };
 
-export const getById = async (actionId: string): Promise<any> => {
+export const getById = async (actionId: string): Promise<string> => {
     const result = await repositories.getById(actionId);
     if (!result) {
         throw new HttpError(404, 'Data Not Found');
