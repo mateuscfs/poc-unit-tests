@@ -3,7 +3,7 @@ import * as repository from '../../repositories';
 
 test('repositories create ', async t => {
     const stringData = { testei: 'created' };
-    const result = await repository.create(stringData);
+    const result = await repository.create(<any>stringData);
 
     expect(result).toEqual('created');
 });
@@ -23,8 +23,8 @@ test('repositories updateById Success case', async t => {
 });
 
 test('repositories deleteById', async t => {
-    const stringId = { id: 'UUID' };
-    const result = await repository.deleteById('UUID');
+    const stringID = 'UUID';
+    const result = await repository.deleteById(stringID);
 
     expect(result).toEqual('deleted');
 });

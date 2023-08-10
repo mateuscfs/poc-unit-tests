@@ -49,7 +49,7 @@ test('update success case UpdateById mock', async () => {
         name: 'Voveirne',
         description: 'Serrote',
         active: true,
-        array: ['arrayde', 'stringsss'],
+        array: ['arreia', 'stringsss'],
         number: 3,
     };
     const getByIdSpy = vi.spyOn(repository, 'getById').mockResolvedValueOnce('ID');
