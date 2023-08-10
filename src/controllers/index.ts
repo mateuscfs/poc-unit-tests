@@ -30,11 +30,12 @@ export const update = async (data: UpdateIndexInterface): Promise<any> => {
     try {
         await getById(data.id);
 
-        const { array, number, boolean } = data;
+        const { array, number, active, name } = data;
         const result = await repositories.updateById(data.id, {
             array,
             number,
-            boolean,
+            active,
+            name,
         });
 
         return result;
@@ -50,7 +51,7 @@ export const getAll = async (): Promise<IndexGetAllRepositoryInterface> => {
             throw new HttpError(404, 'No data Found');
         }
 
-        return result;
+        return { data: result };
     } catch (error: any) {
         throw new HttpError(error.statusCode || 500, error.message);
     }

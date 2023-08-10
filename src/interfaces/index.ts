@@ -3,6 +3,7 @@ export interface IndexInterface {
     name?: string;
     active?: boolean;
     array?: string[];
+    number?: number;
 }
 
 export interface CreateIndexInterface {
@@ -21,5 +22,5 @@ export interface UpdateIndexInterface {
 }
 
 export interface IndexGetAllRepositoryInterface {
-    data: CreateIndexInterface[];
+    data: IndexInterface[];
 }
