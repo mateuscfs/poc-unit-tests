@@ -1,0 +1,72 @@
+{
+    "Index": {
+        "properties": {
+            "id": {
+                "type": "string",
+                "example": "0874db54-4d61-49c8-a843-4cad584655be"
+            },
+            "name": {
+                "type": "string",
+                "example": "example name"
+            },
+            "active": {
+                "type": "boolean",
+                "example": true
+            },
+            "array": {
+                "type": "string[]",
+                "example": ["nome", "teste", "23"]
+            },
+            "number": {
+                "type": "number",
+                "example": 23
+            }
+        }
+    },
+    "IndexCreate": {
+        "required": [
+            "name",
+            "number",
+            "array",
+            "active"
+        ],
+        "properties": {
+            "number": {
+                "type": "number",
+                "example": 23
+            },
+            "name": {
+                "type": "string",
+                "example": "example name"
+            },
+            "active": {
+                "type": "boolean",
+                "example": true
+            },
+            "array": {
+                "type": "string[]",
+                "example": ["nome", "teste", "23"]
+            }
+        }
+    },
+    "IndexUpdate": {
+        "properties": {
+            "number": {
+                "type": "number",
+                "example": 23
+            },
+            "name": {
+                "type": "string",
+                "example": "example name"
+            },
+            "active": {
+                "type": "boolean",
+                "example": true
+            },
+            "array": {
+                "type": "string[]",
+                "example": ["nome", "teste", "23"]
+            }
+        }
+    }
+}
