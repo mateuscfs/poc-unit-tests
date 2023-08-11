@@ -7,7 +7,6 @@ const routes = Router();
 
 routes.get('/', (req: Request, res: Response) => {
     res.send('Test Service 1.0.0');
-    console.log(res.status);
 });
 
 routes.post(

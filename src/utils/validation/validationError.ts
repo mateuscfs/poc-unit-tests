@@ -30,13 +30,6 @@ export class ValidatorError extends HttpError {
     constructor(errors: ValidationError[]) {
         super(400, 'Bad Request');
 
-        this.errors = [
-            {
-                location: 'body',
-                param: 'teste',
-                value: 'any',
-                msg: 'any',
-            },
-        ];
+        this.errors = errors;
     }
 }
